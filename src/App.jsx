@@ -1,8 +1,14 @@
 // src/App.jsx
-
-import React from "react";
+import React, { useState } from "react";
+import PostList from "./components/PostList";
 
 export default function App() {
+    const [showPosts, setShowPosts] = useState(false);
+
+    if (showPosts) {
+        return <PostList onBack={() => setShowPosts(false)} />;
+    }
+
   return (
     <div style={{ padding: 20, fontFamily: "Arial, sans-serif" }}>
       <h1 style={{ color: "red" }}>PySonOfBitch</h1>
@@ -13,7 +19,7 @@ export default function App() {
         <li>타입? 약해.</li>
         <li>그래도 결국 써야 해.</li>
       </ul>
-      <button onClick={() => alert("공부하러 갑니다!")}>공부하러 가기</button>
+        <button onClick={() => setShowPosts(true)}>공부하러 가기</button>
     </div>
   );
 }
