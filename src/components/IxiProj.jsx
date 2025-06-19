@@ -1,3 +1,5 @@
+import screenshot from '../images/img1.png';
+
 export default function ProjectDetail() {
     return (
         <div style={{ padding: 20, maxWidth: 800, margin: "auto", fontFamily: "Arial, sans-serif" }}>
@@ -20,6 +22,8 @@ export default function ProjectDetail() {
             <p>
                 Intermittent spikes in memory usage occurred in the batch jobs deployed on Kubernetes pods, impacting service stability.
             </p>
+            <h3>Screenshot</h3>
+            <img src={screenshot} alt="Project Screenshot" style={{ width: '100%', borderRadius: 8, marginBottom: 20 }} />
 
             <h3>Resolution Process</h3>
             <ul>
