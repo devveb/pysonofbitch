@@ -1,8 +1,17 @@
+import {Helmet} from 'react-helmet'
 import screenshot from '../images/img1.png';
 
 export default function ProjectDetail() {
     return (
         <div style={{ padding: 20, maxWidth: 800, margin: "auto", fontFamily: "Arial, sans-serif" }}>
+
+            <Helmet>
+                <title>Ixi Solution Batch System - 프로젝트 상세 | Coding is Writing</title>
+                <meta
+                    name="description"
+                    content="Ixi Solution Batch System 프로젝트: Kubernetes 환경에서 대량 데이터 처리용 Spring Batch 작업을 안정적으로 운영한 경험과 메모리 이슈 해결 과정을 공유합니다."
+                />
+            </Helmet>
 
             <h3>Project Name</h3>
             <p>Ixi Solution Batch System</p>
