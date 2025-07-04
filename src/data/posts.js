@@ -486,21 +486,167 @@ export const posts = [
         You said:
         혹시 파이선을 pysonofbitch 라고 부르는 사람이 있을까? 없으면 상표권 내려고`
     },
-    {
-        id: 2,
-        title: "삽질기 1: Node.js 설치 지옥",
-        content: `대대장님, Node.js 설치하다 개고생한 이야기...
-    
-    npm install 오류, package.json 문제 등...
-    
-    결국 이렇게 해결했다! ... (본문 내용)`
-    },
+
     {
         id: 3,
         title: "GitHub 리포지토리 등록과 푸시 실패기",
         content: `Invalid username or password 에러 때문에 멘붕 왔다가...
     
     해결법은 이거였다! ... (본문 내용)`
+    },
+    {
+        id: 4,
+        title: "인텔리제이로 스프링 프로젝트 생성하면 그래들 꼭 8.5로 낮춰라...후....",
+        content: `좋은 질문입니다. Gradle 8.1.4 이상(예: 8.2 ~ 8.4 포함)에서는 특정 버전의 Spring Boot 프로젝트와 JDK 버전, 그리고 일부 Gradle 플러그인 호환성 문제로 인해 빌드 실패나 예기치 못한 오류가 발생하는 사례가 종종 보고되고 있습니다.
+
+            ✅ 핵심 요약
+            항목\t설명
+            문제 버전\tGradle 8.1.4 이상 (8.2, 8.3, 8.4 등 포함)
+            안전 버전\tGradle 8.5 (많이 사용), 8.4 이하
+            주요 증상\tCould not move temporary workspace 같은 빌드 오류, transformClassesWithDexBuilder 충돌 등
+            해결 방법\tGradle 8.5 이하 (8.4 또는 8.3 추천), 또는 Spring Boot 3.2.5 이상으로 올리기
+            
+            🎯 주요 원인들
+            1. Spring Boot 플러그인의 호환성 문제
+            Spring Boot Gradle Plugin (예: org.springframework.boot)이 Gradle 8.1.4 이상에서 아직 완전히 호환되지 않았던 시기에 프로젝트를 생성했을 가능성이 큽니다.
+            
+            예시:
+            
+            groovy
+            Copy
+            Edit
+            plugins {
+                id 'org.springframework.boot' version '3.1.0'
+            }
+            위 버전은 Gradle 8.1.1 ~ 8.4 사이에서 문제를 일으킬 수 있습니다.
+            
+            2. Kotlin DSL + Java 21 + Gradle 조합
+            최근 버전의 IntelliJ와 Spring Initializr는 Java 21 + Gradle 8.1.4 이상 조합을 권장하는데, 이 조합은 compileKotlin, kapt, annotationProcessor 관련 문제가 발생할 수 있습니다.
+            
+            3. Gradle 캐시 디렉토리 동기화 문제 (특히 Windows)
+            Gradle 8.1.4부터 캐시 전략이 일부 변경되었고, Windows에서 디렉토리 락(lock) 문제를 유발하기도 합니다.
+            → Could not move temporary workspace 오류와 관련 있음.
+            
+            🛠️ 해결 방안
+            방법 1: Gradle 버전 8.5 또는 8.4로 내려 사용
+            gradle-wrapper.properties 수정:
+            
+            properties
+            Copy
+            Edit
+            distributionUrl=https\\://services.gradle.org/distributions/gradle-8.5-bin.zip
+            방법 2: Spring Boot 버전 최신으로 올리기
+            build.gradle 또는 build.gradle.kts에서:
+            
+            groovy
+            Copy
+            Edit
+            plugins {
+                id 'org.springframework.boot' version '3.2.5'  // 혹은 그 이상
+            }
+            💡 IntelliJ에서 생성 시 팁
+            Gradle 버전 수동 선택 가능 (Spring Initializr 마지막 단계에서 Custom 옵션 활용)
+            
+            프로젝트 생성 후 gradle-wrapper.properties 파일 직접 수정하여 버전 다운
+            
+            ✅ 정리
+            권장 조합\t비고
+            Spring Boot 3.2.5 + Gradle 8.5\t최신 안정 조합
+            Spring Boot 3.1.x + Gradle 8.3 또는 8.4\t중간 안정 조합
+            Windows 환경\tGradle 8.1.4 이상에서 디스크 관련 이슈 주의
+            
+            필요하다면 지금 사용하는 Spring Boot 버전과 JDK 버전, 그리고 오류 로그를 알려 주시면 더 구체적인 진단도 도와드릴 수 있습니다!`
+    },
+    {
+        id: 2,
+        title: "Remder에 Spring Boot, React, Postgres로 서비스 올리기",
+        content: `
+        지금까지 구성해본것 중 가장 낮선 구조, React도 극초보, Postgre는 처음 써보고...갓Gpt 최고다
+        소스는 모로레포? 구조라는데 이게 말은 어려운데 그냥 두개의 프로젝트 하나의 폴더에 모아 놓은건 인텔리제이는 서브프로젝트 열기 까다로워서
+        각 프로젝트는 별도 개발창 열어서 개발, 걍 소스 관리만 통합에서...(왜지? 이유는 잘 모르지만 Render에서 Git을 끌어다 빌드하는 구조인데 그떄 편함)
+        
+        로직은 믿을수 있는 든든한 국밥 url 단축로직..근데 훨씬 간편해짐
+        
+        리액트는 걍 Gpt만 믿고 가는걸루
+        
+        ✅ Render에서 React + Spring Boot + PostgreSQL 배포 정리
+🔧 1. 프로젝트 구조 (Monorepo)
+bash
+Copy
+Edit
+/project-root
+├── backend/   # Spring Boot
+│   └── src/...
+├── frontend/  # React + Vite
+│   └── src/...
+├── .git/
+└── ...
+🚀 2. Render 서비스 구성
+역할\tRender 서비스 유형\t빌드 명령어\tPublish 디렉토리
+Frontend\tStatic Site\tnpm install && npm run build\tdist
+Backend\tWeb Service\t./gradlew clean build 또는 Docker 이용\tN/A
+Database\tPostgreSQL\tRender 제공, connection info 사용\t-
+
+🔑 3. DB 접속 정보 (application-render.yml)
+yaml
+Copy
+Edit
+spring:
+  datasource:
+    url: jdbc:postgresql://dpg-xxxxxx/render_db_name
+    username: your_user
+    password: your_pass
+    driver-class-name: org.postgresql.Driver
+🌐 4. CORS 설정 (Spring Boot)
+java
+Copy
+Edit
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+            .allowedOrigins("https://your-frontend.onrender.com")
+            .allowedMethods("*");
+    }
+}
+🔁 5. React → Spring 통신
+js
+Copy
+Edit
+const response = await axios.post(https://your-backend.onrender.com/urlshrtn/shrnk, {
+  originalUrl: originalUrl,
+});
+절대 localhost 쓰지 말기
+
+환경 변수 .env.production으로 관리 가능
+
+🧠 6. 기타 중요 포인트
+React는 dist 폴더 생성되므로 Publish Directory는 꼭 dist로!
+
+Spring Boot는 port 8080 고정 → Render가 자동 감지
+
+CORS 오류 해결은 Spring 쪽에서 허용해줘야 함
+
+프론트와 백이 서로 다른 Render 서비스임을 항상 인지할 것
+
+Static Site는 무료지만 Web Service + DB는 2개부터 유료
+
+🗂 저장용 요약 텍스트
+txt
+Copy
+Edit
+✅ Render 성공 구성
+- Front: React (Static Site), build → dist
+- Back: Spring Boot (Web Service), port 8080
+- DB: Render PostgreSQL, 환경변수 또는 yml로 연결
+- React에서 Backend 요청 시 localhost 대신 실제 URL 사용
+- Spring에서 CORS 허용 필요
+- Static Site는 Rewrite all to index.html 설정해 SPA 라우팅 지원
+- 모든 설정은 .env 또는 yml 분리로 운영
+
+
+--> 이제 mlnl.me 도메인 살려서 단축된 url 리다리렉트 시켜주고, Render url mlnl.me에 연결하고...화면 UI 적용안된거 잡고...그것만 하자 그것만...`
     },
     // 필요한 만큼 추가 가능
 ];
