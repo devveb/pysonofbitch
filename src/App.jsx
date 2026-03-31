@@ -101,6 +101,21 @@ export default function App() {
                 </ul>
             </section>
             <section style={{ marginTop: 40, backgroundColor: "#f9f9f9", padding: 20, borderRadius: 8, boxShadow: "0 0 8px rgba(0,0,0,0.1)" }}>
+                <h2>31.3.2026 / Magok, Seoul.</h2>
+                <p style={{ lineHeight: 1.6, whiteSpace: "pre-line", fontStyle: "italic" }}>
+                    {`
+                    
+                    올해 초 새로운 프로젝트에 합류하라는 지시로 지금은 마곡에서 고도화 프로젝트에 참여하고 있어요.
+                    '고도화'란 말은 많이도 들었던 프로젝트인데 들을때마다 참 모호한 단어구나라는 생각이 듭니다. 
+                    그래서 지금 무슨일을 하냐고 물으신다면, 첫째 Java 버전업 As-is에 적용되어 있던 1.7버전을 21로 올리고 있습니다.
+                    둘째 Spring framework 적용하고 있습니다. 기존에는 별다른 프레임워크 없이 컴파일만해서 쉘 스크립트로 클래스 파일을 호출하는 구조입니다. 
+                    생각해보니 프레임워크 없는 구조는 처음 접해보는것이군요. 예전(프레임워크 출현전)에는 많은 시스템이 이런 형상이었을텐데 말이죠.
+                    그리고 리눅스 서버에서 AWS로 이사중입니다. 아직도 모호한 부분, 단어가 많은데 오늘은 이쯤에서 메모를 마칩니다. 
+                    `}
+                </p>
+            </section>
+            
+            <section style={{ marginTop: 40, backgroundColor: "#f9f9f9", padding: 20, borderRadius: 8, boxShadow: "0 0 8px rgba(0,0,0,0.1)" }}>
                 <h2>소설도 씁니다.</h2>
                 <p style={{ lineHeight: 1.6, whiteSpace: "pre-line", fontStyle: "italic" }}>
                     {`
