@@ -1,21 +1,32 @@
-steps:
-  - name: Checkout
-    uses: actions/checkout@v3
+name: Deploy to dep-dist
 
-  - name: Intall Node
-    uses: actions/setup-node@v3
-    with:
-      node-version: 18
+on:
+  push:
+    branches:
+      - main
 
-  - name: Intall deps
-    run: npm install
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
-  - name: Build
-    run: npm run build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-  - name: Deploy to dep-dist branch
-    uses: peaceiris/actions-gh-pages@v3
-    with:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
-      publish_dir: ./dist
-      publish_branch: dep-dist
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install deps
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to dep-dist branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: dep-dist
