@@ -4,6 +4,36 @@
     <a href="/novel.html">소설 읽기</a>
     <a href="/kickit.html">사는게 예술</a>
 </nav>
+<style>
+    .tooltip {
+        position: relative;
+        cursor: pointer;
+        border-bottom: 1px dotted #555;
+    }
+
+    .tooltip::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: 125%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        background-color: #333;
+        color: #fff;
+        padding: 6px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        white-space: nowrap;
+
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s;
+    }
+
+    .tooltip:hover::after {
+        opacity: 1;
+    }
+</style>
 <section style="margin-top: 40px; background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.1);">
     <h2>탁류 - <a href="/writters/chaemansik.html">채만식</a></h2>
     <p style="line-height: 1.6; white-space: pre-line;">
